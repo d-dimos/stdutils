@@ -1,4 +1,4 @@
-# Standard utilization functions and Tools
+# Standard utilization functions and tools
 
 1. printing
 2. logging
