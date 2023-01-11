@@ -5,3 +5,5 @@ from .dirs import create_dirs
 from .logger import configure_logger
 from .print import pretty
 
+from meter import AverageMeter
+
