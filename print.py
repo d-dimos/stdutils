@@ -7,15 +7,15 @@ def pretty(namespace, indent=0, logger=True):
         for key, value in vars(namespace).items():
             logging.info(' ' * indent + str(key))
             if isinstance(value, Namespace):
-                logging.info(pretty(value, indent + 3))
+                logging.info(pretty(value, indent + 2))
             else:
-                logging.info(' ' * (indent + 3) + str(value))
+                logging.info(' ' * (indent + 2) + str(value))
     else:
         output_text = ""
         for key, value in vars(namespace).items():
             output_text += ' ' * indent + str(key) + '\n'
             if isinstance(value, Namespace):
-                output_text += pretty(value, indent + 3)
+                output_text += pretty(value, indent + 2)
             else:
-                output_text += ' ' * (indent + 3) + str(value) + '\n'
+                output_text += ' ' * (indent + 2) + str(value) + '\n'
         return output_text
