@@ -4,7 +4,7 @@ import os
 
 def configure_logger(args, level=20):
     handler1 = logging.StreamHandler()
-    handler2 = logging.FileHandler(os.path.join(args.exp_dir, 'log.txt'))
+    handler2 = logging.FileHandler(os.path.join(args.name, 'log.txt'))
     formatter = logging.Formatter('%(asctime)s - %(message)s')
     handler1.setFormatter(formatter)
     handler2.setFormatter(formatter)
