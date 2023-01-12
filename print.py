@@ -5,9 +5,8 @@ import logging
 def pretty(namespace, indent=0, logger=True):
     if logger:
         for key, value in vars(namespace).items():
-            if value is None:
-                continue
-            logging.info(' ' * indent + str(key)+"{{{")
+            print((key, value))
+            logging.info(' ' * indent + str(key))
             if isinstance(value, Namespace):
                 logging.info(pretty(value, indent + 2))
             else:
