@@ -1,5 +1,6 @@
 import os
 import logging
+import torch
 
 
 def save_checkpoint(state, exp_name, epoch=-1, iteration=-1):
