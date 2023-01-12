@@ -27,7 +27,7 @@ class AverageMeter(object):
         self.iter_numbers = []
 
 
-def init_meter(targets):
+def init_meter(targets, dist_metrics):
     return {target: {metric: AverageMeter() for metric in dist_metrics} for target in targets}
 
 
