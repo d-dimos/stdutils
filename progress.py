@@ -26,4 +26,4 @@ def plot_progress(args, mAP, rank1):
             plt.xlabel('#iter')
             plt.legend()
 
-            plt.savefig(os.path.join(args.exp_dir, f'{metric}.png'))
+            plt.savefig(os.path.join(args.name, f'{metric}.png'))
