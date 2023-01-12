@@ -1,5 +1,6 @@
 import torch
 import numpy as np
+import os
 
 os.chdir(os.path.join(os.getcwd(), 'reid_framework'))
 import torchreid
