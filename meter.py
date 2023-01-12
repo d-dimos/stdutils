@@ -1,4 +1,5 @@
 import torch
+import numpy as np
 
 class AverageMeter(object):
     def __init__(self):
