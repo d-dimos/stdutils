@@ -1,6 +1,12 @@
 import torch
 import numpy as np
 
+os.chdir(os.path.join(os.getcwd(), 'reid_framework'))
+import torchreid
+
+os.chdir(os.path.join(os.getcwd(), '..'))
+
+
 class AverageMeter(object):
     def __init__(self):
         self.val = 0
@@ -51,7 +57,6 @@ def evaluate(args, name, model, g_loader, q_loader, mAP, rank1, iter_num=0):
 
 
 def calculate_map_cmc(model, gallery_loader, query_loader, dist_metric, normalize_feat):
-
     def extract(loader):
         f_, pids_, camids_ = [], [], []
         for batch_idx, data in enumerate(loader):
