@@ -8,7 +8,7 @@ def pretty(namespace, indent=0, logger=True):
             logging.info(' ' * indent + str(key))
             if isinstance(value, Namespace):
                 logging.info(pretty(value, indent + 2))
-            elif value is None:
+            elif value == 'None':
                 logging.info()
             else:
                 logging.info(' ' * (indent + 2) + str(value))
