@@ -7,5 +7,5 @@ from .progress import *
 from .print import *
 from .save import *
 
-from meter import *
+from .meter import *
 
