@@ -1,3 +1,7 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+
 def plot_progress(args, mAP, rank1):
     x = mAP[args.data.targets[-1]]['euclidean'].iter_numbers
 
