@@ -22,7 +22,7 @@ def plot_progress(args, mAP, rank1):
             plt.yticks(np.arange(0, 100, step=10))
             plt.ylabel(f'{metric}')
             plt.xlim(0, args.num_iters)
-            plt.xticks(np.arange(0, args.num_iters, step=args.eval_freq))
+            plt.xticks(np.arange(0, args.num_iters, step=args.train.eval_freq))
             plt.xlabel('#iter')
             plt.legend()
 
