@@ -42,9 +42,9 @@ def init_meter(targets, dist_metrics):
     return {target: {metric: AverageMeter() for metric in dist_metrics} for target in targets}
 
 
-def evaluate(args, name, model, g_loader, q_loader, mAP, rank1, iter_num=0):
-    cmc_euclidean, mAP_euclidean = calculate_map_cmc(model, g_loader, q_loader, 'euclidean', args.test.normalize_feat)
-    cmc_cosine, mAP_cosine = calculate_map_cmc(model, g_loader, q_loader, 'cosine', args.test.normalize_feat)
+def evaluate(args, name, model, g_loader, q_loader, mAP, rank1, iter_num=0, **kwargs):
+    cmc_euclidean, mAP_euclidean = calculate_map_cmc(model, g_loader, q_loader, 'euclidean', args.test.normalize_feat, **kwargs)
+    cmc_cosine, mAP_cosine = calculate_map_cmc(model, g_loader, q_loader, 'cosine', args.test.normalize_feat, **kwargs)
     logging.info(f'Evaluation on: {name}')
     logging.info(f'mAP:\t (euclidean) {mAP_euclidean:.1%}\t (cosine) {mAP_cosine:.1%}')
     ranks = [1, 5, 10]
@@ -68,8 +68,8 @@ def calculate_map_cmc(model, gallery_loader, query_loader, dist_metric, normaliz
             if kwargs['no_noise']:
                 features = model.functional(params, training=False, x=imgs, return_featuremaps=True)
             else:
-                features = model.functional(params, training=False, x=imgs, mix=True,
-                                            return_featuremaps=True, noise_layer=True, eval=True)[2]
+                features = model.functional(params, training=False, x=imgs, return_featuremaps=True,
+                                            mix=True, noise_layer=True, eval=True)[2]
 
             features = features.cpu()
             f_.append(features)
