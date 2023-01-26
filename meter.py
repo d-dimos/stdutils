@@ -65,7 +65,7 @@ def calculate_map_cmc(model, gallery_loader, query_loader, dist_metric, normaliz
             imgs, pids, camids = data['img'], data['pid'], data['camid']
             imgs = imgs.cuda()
             params = list(model.parameters())
-            features = model.functional(params, True, imgs, mix=True,
+            features = model.functional(params, x=imgs, mix=True,
                                         return_featuremaps=True, noise_layer=True, eval=True)[2]
 
             features = features.cpu()
