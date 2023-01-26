@@ -58,15 +58,18 @@ def evaluate(args, name, model, g_loader, q_loader, mAP, rank1, iter_num=0):
     rank1[name]['cosine'].update(cmc_cosine[0], args.test.batch_size, iter_num=iter_num)
 
 
-def calculate_map_cmc(model, gallery_loader, query_loader, dist_metric, normalize_feat):
+def calculate_map_cmc(model, gallery_loader, query_loader, dist_metric, normalize_feat, **kwargs):
     def extract(loader):
         f_, pids_, camids_ = [], [], []
         for batch_idx, data in enumerate(loader):
             imgs, pids, camids = data['img'], data['pid'], data['camid']
             imgs = imgs.cuda()
             params = list(model.parameters())
-            features = model.functional(params, training=False, x=imgs, mix=True,
-                                        return_featuremaps=True, noise_layer=True, eval=True)[2]
+            if kwargs['no_noise']:
+                features = model.functional(params, training=False, x=imgs, return_featuremaps=True)
+            else:
+                features = model.functional(params, training=False, x=imgs, mix=True,
+                                            return_featuremaps=True, noise_layer=True, eval=True)[2]
 
             features = features.cpu()
             f_.append(features)
