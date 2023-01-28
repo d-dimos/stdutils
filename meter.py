@@ -43,7 +43,8 @@ def init_meter(targets, dist_metrics):
 
 
 def evaluate(args, name, model, g_loader, q_loader, mAP, rank1, iter_num=0, **kwargs):
-    cmc_euclidean, mAP_euclidean = calculate_map_cmc(model, g_loader, q_loader, 'euclidean', args.test.normalize_feat, **kwargs)
+    cmc_euclidean, mAP_euclidean = calculate_map_cmc(model, g_loader, q_loader, 'euclidean', args.test.normalize_feat,
+                                                     **kwargs)
     cmc_cosine, mAP_cosine = calculate_map_cmc(model, g_loader, q_loader, 'cosine', args.test.normalize_feat, **kwargs)
     logging.info(f'Evaluation on: {name}')
     logging.info(f'mAP:\t (euclidean) {mAP_euclidean:.1%}\t (cosine) {mAP_cosine:.1%}')
@@ -65,8 +66,8 @@ def calculate_map_cmc(model, gallery_loader, query_loader, dist_metric, normaliz
             imgs, pids, camids = data['img'], data['pid'], data['camid']
             imgs = imgs.cuda()
             params = list(model.parameters())
-            if kwargs['no_noise']:
-                features = model.functional(params, training=False, x=imgs, return_featuremaps=False)
+            if kwargs['no_noise']:  # this works for uain arch. For ain: return_feat=F and remove [1]
+                features = model.functional(params, training=False, x=imgs, return_featuremaps=True)[1]
             else:
                 features = model.functional(params, training=False, x=imgs, return_featuremaps=True,
                                             mix=True, noise_layer=True, eval=True)[2]
