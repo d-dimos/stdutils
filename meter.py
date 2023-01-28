@@ -67,7 +67,8 @@ def calculate_map_cmc(model, gallery_loader, query_loader, dist_metric, normaliz
             imgs = imgs.cuda()
             params = list(model.parameters())
             if kwargs['no_noise']:  # this works for uain arch. For ain: return_feat=F and remove [1]
-                features = model.functional(params, training=False, x=imgs, return_featuremaps=True)[1]
+                # features = model.functional(params, training=False, x=imgs, return_featuremaps=True)[1]
+                features = model.functional(params, training=False, x=imgs, return_featuremaps=False)
             else:
                 features = model.functional(params, training=False, x=imgs, return_featuremaps=True,
                                             mix=True, noise_layer=True, eval=True)[2]
