@@ -4,7 +4,7 @@ from .args import *
 from .dirs import *
 from .logger import *
 from .progress import *
-from .print import *
+from .pretty_print import *
 from .save import *
 
 from .meter import *
